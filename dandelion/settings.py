@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -68,6 +68,24 @@ TEMPLATES = [
     },
 ]
 
+# Jinja2
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.jinja2.Jinja2',  # jinja2模板引擎
+#
+#         'DIRS': [BASE_DIR / 'dandelionWEB/templates'],    # 配置模板文件夹的路径
+#         'APP_DIRS': True,
+#         'OPTIONS': {
+#             'context_processors': [
+#                 'django.template.context_processors.debug',
+#                 'django.template.context_processors.request',
+#                 'django.contrib.auth.context_processors.auth',
+#                 'django.contrib.messages.context_processors.messages',
+#             ],
+#         },
+#     },
+# ]
+
 WSGI_APPLICATION = 'dandelion.wsgi.application'
 
 
@@ -80,6 +98,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
