@@ -1,187 +1,12 @@
-<!-- base of templates-->
+{% extends 'common/base.html' %}
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title> 领航 · 蒲公英</title>
 
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link href="../assets/home_page.css" rel="stylesheet">
+{% block header %}
+<title> 领航 · 蒲公英</title>
+{% endblock %}
 
-    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
-            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-            crossorigin="anonymous"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-            crossorigin="anonymous"></script>
-
-    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
-    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-<!--导航条-->
-<nav class="navbar navbar-default navbar-expand-xl navbar-light navbar-fixed-top">
-    <div class="container-fluid">
-        <!--logo-->
-        <a id="menu-logo" class="navbar-brand col-md-1 col-lg-1" rel="" href="#" title="领航 · 蒲公英" itemprop="url">
-            <img src="../assets/first/logo.png" style="height:100px; width: 100px;">
-            <span></span>
-
-        </a>
-
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <!--导航选项-->
-        <div id="navbarDropdown " class="collapse navbar-collapse col-md-8 col-lg-8">
-            <ul id="menu-items" class="nav navbar-nav ">
-                <li id="menu-item-1 " class="">
-                    <a id="menu-item-dropdown" class="dropdown-toggle" data-toggle="dropdown" title="我们的故事" href="#"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-item">我们的故事</span>&nbsp;
-                        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-1" role="menu">
-                        <li id="menu-item-1-1" class="dropdown-item">
-                            <a title="团队介绍" href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">团队介绍</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-1-2" class="dropdown-item">
-                            <a title="我们的荣誉" href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">我们的荣誉</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-1-3" class="dropdown-item">
-                            <a title="创始⼈寄语" href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">创始⼈寄语</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-1-4" class="dropdown-item">
-                            <a title="宣传⽚" href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">宣传⽚</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-1-5" class="dropdown-item">
-                            <a title="logo含义" href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">logo含义</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li id="menu-item-2 " class="">
-                    <a id="menu-item-dropdown" class="dropdown-toggle" data-toggle="dropdown" title="我们的故事" href="#"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-item">李莎精神</span>&nbsp;
-                        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-2" role="menu">
-                        <li id="menu-item-2-1" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">标杆人物</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-2-2" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">品牌历程</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-2-3" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">李莎精神</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-2-4" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">品牌愿景</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-2-5" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">核心价值观</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li id="menu-item-3 " class="">
-                    <a id="menu-item-dropdown" class="dropdown-toggle" data-toggle="dropdown" title="我们的故事" href="#"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-item">品牌服务</span>&nbsp;
-                        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-3" role="menu">
-                        <li id="menu-item-3-1" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">服务模式</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-3-2" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">公益支教</span>
-                            </a>
-                        <li id="menu-item-3-3" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">公益评估</span>
-                            </a>
-                        </li>
-                        <li id="menu-item-3-4" class="dropdown-item">
-                            <a href="" class="dropdown-item text-center">
-                                <span class="dropdown-item">活动回顾</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li id="menu-item-4 " class="">
-                    <a id="menu-item-dropdown" class="dropdown-toggle" data-toggle="dropdown" title="我们的故事" href="#"
-                       aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-item">最新动态</span>&nbsp;
-                    </a>
-                </li>
-
-                <li id="menu-item-5 " class="">
-                    <!--注册或登录-->
-        <span id="register-or-login" class="dropdown-toggle">
-            <p class="text-center" style="padding-top: 40%;">
-                <a href="">注册</a>&nbsp;或&nbsp;<a href="">登录</a>
-            </p>
-        </span>
-                </li>
-            </ul>
-        </div>
-        </div>
-</nav>
-<div id="contents" class="content">
-    <!--我们的荣誉-->
-    <div id="our-glory">
-        <div class="jumbotron">
-            <h1 class="text-center">我们的荣誉</h1>
-            <p>...</p>
-        </div>
-    </div>
-    <!--宣传⽚-->
+{% block content %}
+     <!--宣传⽚-->
     <div id="trailer" class="container">
         <div class="embed-responsive embed-responsive-16by9">
             <div class="text-center" id="trailer-text">
@@ -199,9 +24,9 @@
             </div>
         </div>
     </div>
+
     <!--李莎精神-->
     <div id="Li-Sha-spirit" class="container">
-
         <div class="row left justify-content-center align-items-center" id="lss-1">
             <div class="col-lg-6 col-md-6 " style="padding-top: 1%;">
                 <div class="img-responsive">
@@ -217,9 +42,8 @@
                     <p><a class="btn btn-danger " href="/about/founders-words/" id="know-more">进一步了解</a></p>
                 </div>
             </div>
-
-
         </div>
+
         <div class="row" id="lss-2">
             <h2 class="text-left" style="color: #348F50;font-size:36px;font-weight: bolder;padding-left: 5%;">“ / 李 / 莎 / 精 / 神  / ”</h2><br>
             <div class="col-lg-4 item">
@@ -234,7 +58,6 @@
                         <p>一年支教行，一生支教情</p>
                     </div>
                 </div>
-
             </div>
             <div class="col-lg-4 item">
                 <i class="icon icon-circles"></i>
@@ -376,54 +199,5 @@
                 </span>
             </span>
         </div>
-
-
     </div>
-
-
-    <!--知识库-->
-    <div id="knowledge-base"></div>
-    <br>
-
-    <!--底部-->
-    <div>
-        <footer>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 footer-1">
-                        <div>
-                            <ul class="footer-menu">
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 footer-2">
-                        <p></p>
-
-                    </div>
-                    <div class="col-lg-5 col-md-6 footer-3">
-                        <p></p>
-                    </div>
-                    <div class="col-lg-3 footer-4">
-                        <p></p>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    版权所有 © 2021
-                    <a href="">蒲公英</a>
-                </div>
-                <div class="col-md-4 text-right">
-
-                </div>
-            </div>
-
-
-        </footer>
-    </div>
-</div>
-</body>
-</html>
+{% endblock %}
