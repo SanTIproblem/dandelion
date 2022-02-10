@@ -1,6 +1,4 @@
 /venv
-dandelionWEB/assets/bootstrap-3.4.1-dist
-dandelionWEB/templates/xuexi
 
 =======
 # Byte-compiled / optimized / DLL files
@@ -133,5 +131,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/dandelionWEB/templates/xuexi/
+templates/xuexi/
+statics/
 

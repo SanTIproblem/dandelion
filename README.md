@@ -28,3 +28,6 @@
 
 
 
+1. 静态文件包 static ok
+2. 改所有静态文件
+3. 先models写好，再makemigrations
