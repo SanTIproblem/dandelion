@@ -132,5 +132,7 @@ dmypy.json
 .pyre/
 
 templates/xuexi/
+templates/assets/
 statics/
+collectstatic/
 

@@ -28,6 +28,19 @@
 
 
 
-1. 静态文件包 static ok
-2. 改所有静态文件
-3. 先models写好，再makemigrations
+**细化任务：**
+
+1. 静态文件包 static 1
+2. **改所有静态文件的路径** 1
+3. account:（cbv）
+   1. models 1
+   2. views: register 1；login 1；forgetpwd
+4. portal:（fbv）
+   1. models 1
+   2. views: home 1
+5. **解决静态文件问题：404**  1
+
+
+
+
+

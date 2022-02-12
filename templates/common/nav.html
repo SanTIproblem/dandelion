@@ -1,9 +1,11 @@
+{% load static %}
+
 <!--导航条-->
 <nav class="navbar navbar-default navbar-expand-xl navbar-light navbar-fixed-top">
     <div class="container-fluid">
         <!--logo-->
-        <a id="menu-logo" class="navbar-brand col-md-1 col-lg-1" rel="" href="#" title="领航 · 蒲公英" itemprop="url">
-            <img src="../../statics/portal/img/first/logo.png" style="height:100px; width: 100px;">
+        <a id="menu-logo" class="navbar-brand col-md-1 col-lg-1" rel="" href="{% url 'portal:home' %}" title="领航 · 蒲公英" itemprop="url">
+            <img src="{% static 'portal/img/first/logo.png' %}" style="">
             <span></span>
 
         </a>
@@ -130,7 +132,9 @@
                     <!--注册或登录-->
                     <span id="register-or-login" class="dropdown-toggle">
             <p class="text-center" style="padding-top: 40%;">
-                <a href="">注册</a>&nbsp;或&nbsp;<a href="">登录</a>
+                <a href="{% url 'account:register'%}">注册</a>&nbsp;
+                或&nbsp;
+                <a href="{% url 'account:login' %}">登录</a>
             </p>
         </span>
                 </li>

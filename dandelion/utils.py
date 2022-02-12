@@ -142,75 +142,75 @@ def parse_dict_to_url(dict):
     return url
 
 
-def get_blog_setting():
-    value = cache.get('get_blog_setting')
-    if value:
-        return value
-    else:
-        from blog.models import BlogSettings
-        if not BlogSettings.objects.count():
-            setting = BlogSettings()
-            setting.sitename = 'djangoblog'
-            setting.site_description = '基于Django的博客系统'
-            setting.site_seo_description = '基于Django的博客系统'
-            setting.site_keywords = 'Django,Python'
-            setting.article_sub_length = 300
-            setting.sidebar_article_count = 10
-            setting.sidebar_comment_count = 5
-            setting.show_google_adsense = False
-            setting.open_site_comment = True
-            setting.analyticscode = ''
-            setting.beiancode = ''
-            setting.show_gongan_code = False
-            setting.save()
-        value = BlogSettings.objects.first()
-        logger.info('set cache get_blog_setting')
-        cache.set('get_blog_setting', value)
-        return value
+# def get_blog_setting():
+#     value = cache.get('get_blog_setting')
+#     if value:
+#         return value
+#     else:
+#         from blog.models import BlogSettings
+#         if not BlogSettings.objects.count():
+#             setting = BlogSettings()
+#             setting.sitename = 'djangoblog'
+#             setting.site_description = '基于Django的博客系统'
+#             setting.site_seo_description = '基于Django的博客系统'
+#             setting.site_keywords = 'Django,Python'
+#             setting.article_sub_length = 300
+#             setting.sidebar_article_count = 10
+#             setting.sidebar_comment_count = 5
+#             setting.show_google_adsense = False
+#             setting.open_site_comment = True
+#             setting.analyticscode = ''
+#             setting.beiancode = ''
+#             setting.show_gongan_code = False
+#             setting.save()
+#         value = BlogSettings.objects.first()
+#         logger.info('set cache get_blog_setting')
+#         cache.set('get_blog_setting', value)
+#         return value
 
 
-def save_user_avatar(url):
-    '''
-    保存用户头像
-    :param url:头像url
-    :return: 本地路径
-    '''
-    setting = get_blog_setting()
-    logger.info(url)
+# def save_user_avatar(url):
+#     '''
+#     保存用户头像
+#     :param url:头像url
+#     :return: 本地路径
+#     '''
+#     setting = get_blog_setting()
+#     logger.info(url)
+#
+#     try:
+#         imgname = url.split('/')[-1]
+#         if imgname:
+#             path = r'{basedir}/avatar/{img}'.format(
+#                 basedir=setting.resource_path, img=imgname)
+#             if os.path.exists(path):
+#                 os.remove(path)
+#         rsp = requests.get(url, timeout=2)
+#         if rsp.status_code == 200:
+#             basepath = r'{basedir}/avatar/'.format(
+#                 basedir=setting.resource_path)
+#             if not os.path.exists(basepath):
+#                 os.makedirs(basepath)
+#
+#             imgextensions = ['.jpg', '.png', 'jpeg', '.gif']
+#             isimage = len([i for i in imgextensions if url.endswith(i)]) > 0
+#             ext = os.path.splitext(url)[1] if isimage else '.jpg'
+#             savefilename = str(uuid.uuid4().hex) + ext
+#             logger.info('保存用户头像:' + basepath + savefilename)
+#             with open(basepath + savefilename, 'wb+') as file:
+#                 file.write(rsp.content)
+#             return 'https://resource.lylinux.net/avatar/' + savefilename
+#     except Exception as e:
+#         logger.error(e)
+#         return url
 
-    try:
-        imgname = url.split('/')[-1]
-        if imgname:
-            path = r'{basedir}/avatar/{img}'.format(
-                basedir=setting.resource_path, img=imgname)
-            if os.path.exists(path):
-                os.remove(path)
-        rsp = requests.get(url, timeout=2)
-        if rsp.status_code == 200:
-            basepath = r'{basedir}/avatar/'.format(
-                basedir=setting.resource_path)
-            if not os.path.exists(basepath):
-                os.makedirs(basepath)
 
-            imgextensions = ['.jpg', '.png', 'jpeg', '.gif']
-            isimage = len([i for i in imgextensions if url.endswith(i)]) > 0
-            ext = os.path.splitext(url)[1] if isimage else '.jpg'
-            savefilename = str(uuid.uuid4().hex) + ext
-            logger.info('保存用户头像:' + basepath + savefilename)
-            with open(basepath + savefilename, 'wb+') as file:
-                file.write(rsp.content)
-            return 'https://resource.lylinux.net/avatar/' + savefilename
-    except Exception as e:
-        logger.error(e)
-        return url
-
-
-def delete_sidebar_cache():
-    from blog.models import LinkShowType
-    keys = ["sidebar" + x for x in LinkShowType.values]
-    for k in keys:
-        logger.info('delete sidebar key:' + k)
-        cache.delete(k)
+# def delete_sidebar_cache():
+#     from blog.models import LinkShowType
+#     keys = ["sidebar" + x for x in LinkShowType.values]
+#     for k in keys:
+#         logger.info('delete sidebar key:' + k)
+#         cache.delete(k)
 
 
 def delete_view_cache(prefix, keys):

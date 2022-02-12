@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # 激活的app要在这里添加
+    'accounts',
+    'portal'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,23 +77,6 @@ TEMPLATES = [
     },
 ]
 
-# Jinja2
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.jinja2.Jinja2',  # jinja2模板引擎
-#
-#         'DIRS': [BASE_DIR / 'dandelionWEB/templates'],    # 配置模板文件夹的路径
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
 
 WSGI_APPLICATION = 'dandelion.wsgi.application'
 
@@ -142,12 +131,28 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
+
+# 使用 collectstatic后收集的静态文件的存放绝对路径
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
 STATIC_URL = '/static/'
+
+# 存放静态文件的目录，其中也可以包含url
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "statics"),
+    os.path.join(BASE_DIR, 'statics')
 ]
+
+# Upload files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+
+AUTH_USER_MODEL = 'accounts.NormalUser'
+LOGIN_URL = '/login/'
+
+TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+DATE_TIME_FORMAT = '%Y-%m-%d'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
