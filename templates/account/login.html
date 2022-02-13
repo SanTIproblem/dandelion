@@ -3,12 +3,13 @@
 
 {% block header %}
     <title>登录</title>
+
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" id="page">
 
-        <h2 class="form-signin-heading text-center">登录</h2>
+        <h1 class="form-signin-heading text-center">登 录</h1>
 
         <div class="card card-signin">
             <img class="img-circle profile-img" src="{% static 'blog/img/avatar.png' %}" alt="">
@@ -26,9 +27,11 @@
                     {{ field.errors }}
                 {% endfor %}
 
+            <br>
                 <input type="hidden" name="next" value="{{ redirect_to }}">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 
+            <br>
                 <div class="checkbox">
                     {% comment %}<a class="pull-right">Need help?</a>{% endcomment %}
                     <label>
@@ -41,8 +44,8 @@
                {% endcomment %}
             </form>
         </div>
-
-        <p class="text-center">
+        <br>
+        <p class="text-center" id="turn-to-other-pages">
             <a href="{% url "account:register" %}">创建账户</a>
             |
             <a href="/">回到首页</a>
