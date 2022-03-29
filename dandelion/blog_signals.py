@@ -30,11 +30,11 @@ def send_email_signal_handler(sender, **kwargs):
         to=emailto)
     msg.content_subtype = "html"
 
-
     try:
         result = msg.send()
-        print(result)
+        logger.info(f'成功发送邮件：{emailto}, {result}')
     except Exception as e:
         logger.error(f"失败邮箱号: {emailto}, {e}")
+
 
 

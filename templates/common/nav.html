@@ -132,10 +132,18 @@
                 <li id="menu-item-5 " class="">
                     <!--注册或登录-->
                     <span id="register-or-login" class="dropdown-toggle">
-            <p class="text-center" style="padding-top: 40%;">
-                <a href="{% url 'account:register'%}">注册</a>&nbsp;
-                或&nbsp;
-                <a href="{% url 'account:login' %}">登录</a>
+            <p class="text-center" style="padding-top: 40%;" id="login-or-not">
+                {% if request.user.is_authenticated %}
+                    <p>
+                    您好，<a href="">{{ request.user.username }}</a>！
+                    </p>
+                {% else %}
+                    <p>
+                    <a href="{% url 'account:register'%}">注册</a>&nbsp;
+                    或&nbsp;
+                    <a href="{% url 'account:login' %}">登录</a>
+                    </p>
+                {% endif %}
             </p>
         </span>
                 </li>

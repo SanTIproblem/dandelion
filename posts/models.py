@@ -7,10 +7,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-# markdown
-from mdeditor.fields import MDTextField
-# slug
-from uuslug import slugify
+from mdeditor.fields import MDTextField  # markdown
+from uuslug import slugify  # slug
 
 from dandelion.utils import cache_decorator, cache
 from dandelion.utils import get_current_site

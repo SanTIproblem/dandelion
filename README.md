@@ -36,7 +36,7 @@ posts：发帖功能
 | 美化 | 22.02.12-22.02.13 |
 |                 |                 |
 | **论坛** | 22.03.28-22.04.01 |
-| comment | 03.28-03.30 |
+| post&comment | 03.28-03.30 |
 | 美化 | 03.31-04.01 |
 |                     |                         |
 
@@ -60,13 +60,23 @@ posts：发帖功能
 
 22.03.28：
 
-1. 注册能存进数据库，但发不了邮件认证账户==》result
-   1. 失败邮箱号: ['945992479@qq.com'], [WinError 10061] 由于目标计算机积极拒绝，无法连接。
-   
+1. 注册能存进数据库，但发不了邮件认证账户==》result    *1*
+   1. 问题一：失败邮箱号: ['945992479@qq.com'], [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+      解决：开端口，https://blog.csdn.net/weixin_46900108/article/details/119773973
+
+   2. 问题二：
+
       ![image-20220329153659056](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220329153659056.png)
-   
-      解决：https://github.com/liangliangyy/DjangoBlog/issues/460
-2. 论坛===》comment功能
+
+      解决：改settings.py中的邮件配置，不能有中文
+
+      ​			https://blog.csdn.net/junxieshiguan/article/details/81811100
+
+2. 论坛===》post&comment功能
+
+   1. 先制定页面框架，再实现基本逻辑，最后细化页面
+   2. 论坛页、不同的帖子细则页
 
 
 
