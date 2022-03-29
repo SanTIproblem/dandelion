@@ -1,5 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -23,6 +24,7 @@ FormView: https://www.jianshu.com/p/ac9fadf89836
 
 # 注册
 class RegisterView(FormView):
+    # 模板文件
     form_class = RegisterForm
     template_name = 'account/registration_form.html'
 
@@ -31,6 +33,7 @@ class RegisterView(FormView):
         # 注册成功
         if form.is_valid():
             user = form.save(False)
+            user.clean_password = form.cleaned_data['password2']
             user.is_active = False
             user.source = 'Register'
             user.save(True)
@@ -118,3 +121,36 @@ class LoginView(FormView):
     #     return redirect_to
 
 
+
+# Result
+def account_result(request):
+    type = request.GET.get('type')
+    id = request.GET.get('id')
+
+    user = get_object_or_404(get_user_model(), id=id)
+    # logger.info(type)
+    if user.is_active:
+        return HttpResponseRedirect('/')
+    if type and type in ['register', 'validation']:
+        if type == 'register':
+            content = '''
+    恭喜您注册成功，一封验证邮件已经发送到您 {email} 的邮箱，请验证您的邮箱后登录本站。
+    '''.format(email=user.email)
+            title = '注册成功'
+        else:
+            c_sign = get_sha256(get_sha256(settings.SECRET_KEY + str(user.id)))
+            sign = request.GET.get('sign')
+            if sign != c_sign:
+                return HttpResponseForbidden()
+            user.is_active = True
+            user.save()
+            content = '''
+            恭喜您已经成功的完成邮箱验证，您现在可以使用您的账号来登录本站。
+            '''
+            title = '验证成功'
+        return render(request, 'account/result.html', {
+            'title': title,
+            'content': content
+        })
+    else:
+        return HttpResponseRedirect('/')

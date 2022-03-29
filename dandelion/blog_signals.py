@@ -13,7 +13,7 @@ from django.dispatch import receiver
 logger = logging.getLogger(__name__)
 
 send_email_signal = django.dispatch.Signal(
-    providing_args=['emailto', 'title', 'content']
+    ['emailto', 'title', 'content']
 )
 
 

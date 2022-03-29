@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'mdeditor',
     # 激活的app要在这里添加
     'accounts',
     'portal'
