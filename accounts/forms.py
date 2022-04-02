@@ -23,8 +23,14 @@ class RegisterForm(UserCreationForm):
 
         self.fields['username'].widget = widgets.TextInput(
             attrs={'placeholder': "用户名", "class": "form-control"})
+        self.fields['phone_number'].widget = widgets.TextInput(
+            attrs={'placeholder': "手机号（必填）", "class": "form-control"})
         self.fields['email'].widget = widgets.EmailInput(
-            attrs={'placeholder': "邮箱", "class": "form-control"})
+            attrs={'placeholder': "邮箱（必填）", "class": "form-control"})
+        self.fields['weixin_number'].widget = widgets.TextInput(
+            attrs={'placeholder': "微信号（选填）", "class": "form-control"})
+        self.fields['QQ_number'].widget = widgets.TextInput(
+            attrs={'placeholder': "QQ号（选填）", "class": "form-control"})
         self.fields['password1'].widget = widgets.PasswordInput(
             attrs={'placeholder': "密码", "class": "form-control"})
         self.fields['password2'].widget = widgets.PasswordInput(
@@ -35,6 +41,12 @@ class RegisterForm(UserCreationForm):
         if get_user_model().objects.filter(email=email).exists():
             raise ValidationError("该邮箱已经存在.")
         return email
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        if get_user_model().objects.filter(phone_number=phone_number).exists():
+            raise ValidationError("该手机号已经存在.")
+        return phone_number
 
     class Meta:
         model = get_user_model()

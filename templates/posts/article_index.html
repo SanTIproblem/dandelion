@@ -1,0 +1,15 @@
+{% extends 'common/base.html' %}
+{% block header %}
+    <title>论坛首页</title>
+{% endblock %}
+
+{% block content %}
+    <div id="main">
+        <div id="contents">
+        {#  需要一个循环，把数据库里的帖子都读出来  #}
+            {% for post in post_list %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

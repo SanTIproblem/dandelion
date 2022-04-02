@@ -4,12 +4,20 @@
 <nav class="navbar navbar-default navbar-expand-xl navbar-light navbar-fixed-top">
     <div class="container-fluid " style="">
         <!--logo-->
-        <a id="menu-logo" class="navbar-brand col-md-1 col-lg-1" rel="" href="{% url 'portal:home' %}" title="领航 · 蒲公英" itemprop="url">
+    {% if user.is_authenticated %}
+        <a id="menu-logo" class="navbar-brand col-md-1 col-lg-1" rel="" href="{% url 'posts:article_index' %}" title="论坛 · 蒲公英" itemprop="url">
             <img src="{% static 'portal/img/first/logo.png' %}"
                  style="height: 75px;width: 75px;">
             <span></span>
-
         </a>
+    {% else %}
+        <p id="menu-logo" class="navbar-brand col-md-1 col-lg-1">
+            <img src="{% static 'portal/img/first/logo.png' %}"
+                 style="height: 75px;width: 75px;">
+            <span></span>
+        </p>
+    {% endif %}
+
 
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                 aria-expanded="false" aria-controls="navbar">
@@ -133,9 +141,9 @@
                     <!--注册或登录-->
                     <span id="register-or-login" class="dropdown-toggle">
             <p class="text-center" style="padding-top: 40%;" id="login-or-not">
-                {% if request.user.is_authenticated %}
+                {% if user.is_authenticated %}
                     <p>
-                    您好，<a href="">{{ request.user.username }}</a>！
+                    您好，<a href="/" style="color: #B5AC49">{{ user.username }}</a>！
                     </p>
                 {% else %}
                     <p>

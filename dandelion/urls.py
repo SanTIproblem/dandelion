@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls',namespace='account')),
     path('', include('portal.urls', namespace='portal')),
+    path('', include('posts.urls', namespace='posts')),
     # 收集后的静态文件
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
     # 上传文件

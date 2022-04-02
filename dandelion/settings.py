@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'mdeditor',
     # 激活的app要在这里添加
     'accounts',
-    'portal'
+    'portal',
+    'posts',
+    'comments'
 ]
 
 SITE_ID = 1
@@ -136,7 +138,7 @@ USE_TZ = True
 # 使用 collectstatic后收集的静态文件的存放绝对路径
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/statics/'
 
 # 存放静态文件的目录，其中也可以包含url
 STATICFILES_DIRS = [

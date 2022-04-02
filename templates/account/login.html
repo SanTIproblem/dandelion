@@ -10,30 +10,26 @@
     <div class="" id="page">
 
         <h1 class="form-signin-heading text-center">登 录</h1>
+    <br>
 
         <div class="card card-signin">
-            <img class="img-circle profile-img" src="{% static 'blog/img/avatar.png' %}" alt="">
-            <form class="form-signin" action="{% url 'account:login' %}" method="post">
+            <img class="img-circle profile-img center-block" src="{% static 'blog/img/avatar.png' %}" alt="">
+        <br>
+            <form class="form-signin center-block" action="{% url 'account:login' %}" method="post">
                 {% csrf_token %}
-                {% comment %}
-                <label for="inputEmail" class="sr-only">邮箱</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="请输入邮箱" required autofocus>
-                <label for="inputPassword" class="sr-only">密码</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="请输入密码" required>
-                {% endcomment %}
                 {{ form.non_field_errors }}
                 {% for field in form %}
                     {{ field }}
+                    <br>
                     {{ field.errors }}
                 {% endfor %}
 
             <br>
                 <input type="hidden" name="next" value="{{ redirect_to }}">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+                <button class="btn btn-lg btn-primary btn-block center-block" type="submit">登录</button>
 
             <br>
-                <div class="checkbox">
-                    {% comment %}<a class="pull-right">Need help?</a>{% endcomment %}
+                <div class="checkbox text-center">
                     <label>
                         <input type="checkbox" value="remember-me" name="remember">保持登录
                     </label>

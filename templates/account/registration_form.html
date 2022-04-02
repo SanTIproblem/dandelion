@@ -9,22 +9,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="" id="page">
+    <div class="center-block" id="page">
 
         <h1 class="form-signin-heading text-center">创 建 账 户</h1>
+    <br>
 
         <div class="card card-signin">
-            <img class="img-circle profile-img" src="{% static 'blog/img/avatar.png' %}" alt="">
-            <form class="form-signin" action="{% url 'account:register' %}" method="post">
+            <img class="img-circle profile-img center-block" src="{% static 'blog/img/avatar.png' %}" alt="">
+        <br>
+            <form class="form-register center-block" action="{% url 'account:register' %}" method="post">
                 {% csrf_token %}
                 {{ form.non_field_errors }}
                 {% for field in form %}
                     {{ field }}
+                    <br>
                     {{ field.errors }}
                 {% endfor %}
 
                 <br>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">创建账户</button>
+                <button class="btn btn-lg btn-primary btn-block center-block text-center" type="submit">创建账户</button>
 
             </form>
         </div>
