@@ -50,7 +50,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("username", "email")
+        fields = ("username", "email", "phone_number", "weixin_number", "QQ_number")
 
 
 class ForgetPasswordForm(forms.Form):

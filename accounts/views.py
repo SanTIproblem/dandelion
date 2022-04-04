@@ -1,5 +1,5 @@
 from django.contrib import auth
-from django.contrib.auth import get_user_model, REDIRECT_FIELD_NAME
+from django.contrib.auth import get_user_model, REDIRECT_FIELD_NAME, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
@@ -23,12 +23,12 @@ FormView: https://www.jianshu.com/p/ac9fadf89836
 函数装饰器: https://www.runoob.com/w3cnote/python-func-decorators.html
 '''
 
+
 # 注册
 class RegisterView(FormView):
     # 模板文件
     form_class = RegisterForm
     template_name = 'account/registration_form.html'
-
 
     def form_valid(self, form):
         # 注册成功
@@ -104,7 +104,7 @@ class LoginView(FormView):
             auth.login(self.request, form.get_user())
             if self.request.POST.get("remember"):
                 self.request.session.set_expiry(self.login_ttl)
-            # print('hello', self.request.user.is_authenticated)
+            print('hello', self.request.user.is_authenticated)
             return super().form_valid(form)
         else:
             return self.render_to_response({
@@ -121,14 +121,18 @@ class LoginView(FormView):
 
 
 # 登出
-class LogoutView(FormView):
-    form_class = LoginForm
-    template_name = 'account/login.html'
-    success_url = '/'
+class LogoutView(RedirectView):
+    # 登出后会重定向到login界面
+    url = '/login/'
 
-    def form_valid(self, form):
-        pass
+    @method_decorator(never_cache)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        # delete_sidebar_cache()
+        return super().get(request, *args, **kwargs)
 
 
 # Result
@@ -163,5 +167,3 @@ def account_result(request):
         })
     else:
         return HttpResponseRedirect('/')
-
-

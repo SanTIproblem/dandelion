@@ -6,10 +6,15 @@
 {% block content %}
     <div id="main">
         <div id="contents">
+        {% if user.is_authenticated %}
         {#  需要一个循环，把数据库里的帖子都读出来  #}
             {% for post in post_list %}
-
+            {% empty %}
+                <p class="text-center">这里还没有帖子，</p>
             {% endfor %}
+        {% else %}
+
+        {% endif %}
         </div>
     </div>
 {% endblock %}
