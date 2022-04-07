@@ -87,11 +87,23 @@ posts：发帖功能
 bugs：
 
 1. 登录功能，登录后回首页还是未登录状态
-2. digital_file: NoneType不可调用，看看怎么get form
+
+   解法：其实登出了，但是nav状态没有更改
+
+2. digital_file: NoneType不可调用，看看怎么get form 
+
+   解法：直接query_dict
 
 ![image-20220405163833729](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220405163833729.png)
 
 如果直接用request.POST的话，就会是一个QueryDict，而不是形成一个form（字典）
+
+
+
+想法：
+
+1. 点击用户名，跳转到用户专属页面normaluser.html，页面有发帖记录&调查表记录（LIstView）
+2. 帖子页面article_index&article_detail
 
 
 

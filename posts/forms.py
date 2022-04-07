@@ -8,6 +8,9 @@ from django.forms import widgets
 
 from accounts.models import NormalUser
 
+class ArticleListForm(Form):
+    pass
+
 
 class DigitalFileForm(Form):
     name = forms.CharField(label='姓名', max_length=100, required= True)

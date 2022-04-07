@@ -10,11 +10,16 @@
         {#  需要一个循环，把数据库里的帖子都读出来  #}
             {% for post in post_list %}
             {% empty %}
-                <p class="text-center">这里还没有帖子，</p>
+                <div class="jumbotron">
+                    <h1 class="display-4">这里还没有帖子<br>😀😀😀</h1>
+                    <br>
+                    <p class="lead">请点击右上角的发帖按钮发表第一篇帖子吧！</p>
+                </div>
             {% endfor %}
         {% else %}
-
+             <h2 class="text-center"> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
         {% endif %}
+
         </div>
     </div>
 {% endblock %}

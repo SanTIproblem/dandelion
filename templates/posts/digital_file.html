@@ -1,6 +1,7 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block header %}
+    <script src="{% static 'posts/js/add_or_del_rows.js' %}"></script>
     <link rel="stylesheet" href="{% static 'posts/css/base_posts.css' %}">
     <title>数字化档案</title>
 {% endblock %}
@@ -46,7 +47,7 @@
                                 <input type="text" class="form-control" name='gender' required="True">
                             </div>
                             <div class="form-group ">
-                                <label for="birthdayInput">出生年月</label>
+                                <label for="birthdayInput">出生日期</label>
                                 <input type="date" class="form-control" name='birthday'>
                             </div>
                         </div>
@@ -156,27 +157,21 @@
                     {#                    家庭情况#}
                     <div id="jiating-qingkuang">
                         <h2 class="text-center">家庭情况</h2>
-                        <table class="table table-bordered table-hover">
-                            <br>
-                            <tr>
-                                <th>姓名</th>
-                                <th>关系</th>
-                                <th>年龄</th>
-                                <th>职业/单位</th>
-                                <th>月收入</th>
-                                <th>健康状况</th>
-                                <th>基本情况</th>
-                            </tr>
-                            <tr>
-
-                            </tr>
-                        </table>
+                        <br>
+                        <div class="table table-bordered table-hover">
+                            <div id="toolbar">
+                                <a id="addRow" onclick="addRow()">添加家庭成员</a>
+                                <a id="removeRow" onclick="removeRow()">删除家庭成员</a>
+                            </div>
+                        </div>
+                        <table id="jiatingbiao"></table>
                     </div>
                     <br><br>
 
                     {#                    家庭经济收入情况#}
                     <div id="jingji-shouru">
                         <h2 class="text-center">家庭经济收入情况</h2>
+                        <br>
                         <div class="form-group">
                             <label>债务情况</label>
                             <input type="text" class="form-control" name="debt_situation">
@@ -206,7 +201,7 @@
 
                     {#                   受资助情况#}
                     <div id="zizhu-qingkuang">
-                        <h2 class="text-center">受资助情况</h2>
+                        <h2 class="text-center">受资助情况</h2><br>
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>是否住校</label>
@@ -222,14 +217,14 @@
                             </div>
                         </div>
                         <br><br>
-                        <div class="form-inline">
+                        <div class="form-group">
                             <div class="form-group">
                                 <label>获得其他资助、补助、奖学金（名称及金额）</label>
                                 <input type="text" class="form-control" name="other_help_received">
                             </div>
                         </div>
                         <br><br>
-                         <div class="form-inline">
+                         <div class="form-group">
                             <div class="form-group">
                                 <label>曾得到何种奖励</label>
                                 <input type="text" class="form-control" name="reward_received">
@@ -240,28 +235,28 @@
 
                     {#                    学生自述#}
                      <div  id="xuesheng-zishu" class="form-group">
-                                <h2 class="text-center">学生自述</h2>
+                                <h2 class="text-center">学生自述</h2><br>
                                 <input type="text" class="form-control" style="height: 150px;" name="statement_of_student">
                      </div>
                     <br><br>
 
                     {#                    班主任评语#}
                     <div  id="banzhuren-pingyu" class="form-group">
-                                <h2 class="text-center">班主任评语</h2>
+                                <h2 class="text-center">班主任评语</h2><br>
                                 <input type="text" class="form-control" style="height: 150px;" name="comments_of_teacher">
                      </div>
                     <br><br>
 
                     {#                    家访手记及意见#}
-                    <div  id="shouji-ji-yijian" class="form-group">
-                                <h2 class="text-center">家访手记及意见</h2>
+                    <div  id="shouji-yijian" class="form-group">
+                                <h2 class="text-center">家访手记及意见</h2><br>
                                 <input type="text" class="form-control" style="height: 150px;" name="home_visit_notes_and_opinions">
                      </div>
                     <br><br>
 
                     {#                    评定贫困程度#}
                     <div id="pinkun-chengdu">
-                        <h2 class="text-center">评定贫困程度</h2>
+                        <h2 class="text-center">评定贫困程度</h2><br>
                          <div class="form-inline">
                             <div class="form-group">
                                 <label>孤儿</label>

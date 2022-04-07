@@ -225,4 +225,4 @@ class DigitalFile(BaseModel):
         get_latest_by = 'id'
 
     def __str__(self):
-        return self.name
+        return '调查对象：'+self.name

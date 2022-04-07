@@ -1,0 +1,21 @@
+{% extends 'common/base.html' %}
+
+{% block header %}
+    <title> {{ title }}</title>
+{% endblock %}
+{% block content %}
+    <div id="primary" class="site-content">
+        <div id="content" role="main">
+
+            <header class="archive-header">
+
+                <h2 class="archive-title text-center"> {{ content }}</h2>
+            </header><!-- .archive-header -->
+            <br/>
+            <p class="text-center" id="turn-to-other-pages">
+                <a href="/">回到首页</a>
+
+            </p><!-- .archive-header -->
+        </div>
+    </div>
+{% endblock %}
