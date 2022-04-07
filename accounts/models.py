@@ -32,7 +32,7 @@ class NormalUser(AbstractUser):
                 'author_name': self.username})
 
     def __str__(self):
-        return self.email
+        return self.username+', '+ self.email
 
     def get_full_url(self):
         site = get_current_site().domain

@@ -77,6 +77,21 @@ posts：发帖功能
 
    1. 先制定页面框架，再实现基本逻辑，最后细化页面
    2. 论坛页、不同的帖子细则页
+   
+3. 用request.POST，可以读出表单里的内容
+
+
+
+22.04.05
+
+bugs：
+
+1. 登录功能，登录后回首页还是未登录状态
+2. digital_file: NoneType不可调用，看看怎么get form
+
+![image-20220405163833729](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220405163833729.png)
+
+如果直接用request.POST的话，就会是一个QueryDict，而不是形成一个form（字典）
 
 
 

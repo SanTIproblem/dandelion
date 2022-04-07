@@ -36,7 +36,7 @@ class RegisterView(FormView):
             user = form.save(False)
             user.clean_password = form.cleaned_data['password2']
             user.is_active = False
-            user.source = 'Register'
+            user.source = '注册用户'
             user.save(True)
             site = get_current_site().domain
             sign = get_sha256(get_sha256(settings.SECRET_KEY + str(user.id)))
@@ -99,12 +99,14 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         form = AuthenticationForm(data=self.request.POST, request=self.request)
+        # print("form:", form)
+        # print("post", self.request.POST)
         if form.is_valid():
             # 登录认证
             auth.login(self.request, form.get_user())
             if self.request.POST.get("remember"):
                 self.request.session.set_expiry(self.login_ttl)
-            print('hello', self.request.user.is_authenticated)
+            # print('hello', self.request.user.is_authenticated)
             return super().form_valid(form)
         else:
             return self.render_to_response({

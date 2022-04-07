@@ -1,69 +1,313 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block header %}
-<title>数字化档案</title>
+    <link rel="stylesheet" href="{% static 'posts/css/base_posts.css' %}">
+    <title>数字化档案</title>
 {% endblock %}
 
 {% block content %}
 
     <header>
         <h1 class="text-center">龙胜志愿者家访调查表</h1>
+        <br>
     </header>
     <div id="main">
         {% if user.is_authenticated %}
             <form action="{% url 'posts:digital_file' %}" method="post">
-            {% csrf_token %}
-            <div class="form-inline">
-                <div class="form-group">
-                    <label for="nameInput">姓名</label>
-                    <input type="text" class="form-control" id='nameInput' placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="genderInput">性别</label>
-                    <input type="text" class="form-control" id='genderInput' placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="birthdayInput">出生年月</label>
-                    <input type="date" class="form-control" id='birthdayInput' placeholder="">
-                </div>
-            </div>
+                {% csrf_token %}
+                {#                {{ form.non_field_errors }}#}
+                {#                {{ form }}#}
 
-            <div class="form-inline">
-                <div class="form-group">
-                    <label for="schoolInput">在读学校</label>
-                    <input type="text" class="form-control" id='schoolInput' placeholder="">
+                <div id="invest" class="form-inline text-center">
+                    <div class="form-group col-md-6">
+                        <label for="">调查人</label>
+                        <input type="text" class="form-control" name="investigator" required="True">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">调查日期</label>
+                        <input type="date" class="form-control" name="inves_time" required="True">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="gradeAndClassInput">年级班别</label>
-                    <input type="text" class="form-control" id='gradeAndClassInput' placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="schoolAddressInput">学校详细地址</label>
-                    <input type="date" class="form-control" id='schoolAddressInput' placeholder="">
-                </div>
-            </div>
+                <br><br>
+                <hr>
+                <br>
+                {#                基本情况#}
+                <div id="jiben-qingkuang">
+                    <h2 class="text-center">基本情况</h2>
+                    <br>
+                    <div id="content" class="text-left">
+                        <div class="form-inline">
+                            <div class="form-group ">
+                                <label for="nameInput">姓名</label>
+                                <input type="text" class="form-control" name="name" required="True">
+                            </div>
+                            <div class="form-group ">
+                                <label for="genderInput">性别</label>
+                                <input type="text" class="form-control" name='gender' required="True">
+                            </div>
+                            <div class="form-group ">
+                                <label for="birthdayInput">出生年月</label>
+                                <input type="date" class="form-control" name='birthday'>
+                            </div>
+                        </div>
+                        <br><br>
 
-            <div class="form-inline">
-                <div class="form-group">
-                    <label for="schoolInput">身高</label>
-                    <input type="text" class="form-control" id='schoolInput' placeholder="">
+                        <div class="form-inline">
+                            <div class="form-group ">
+                                <label for="schoolInput">在读学校</label>
+                                <input type="text" class="form-control" name="school">
+                            </div>
+                            <div class="form-group ">
+                                <label for="gradeAndClassInput">年级班别</label>
+                                <input type="text" class="form-control" name="grade_and_class">
+                            </div>
+                            <div class="form-group ">
+                                <label for="schoolAddressInput">学校详细地址</label>
+                                <input type="text" class="form-control" name="school_address">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="form-inline">
+                            <div class="form-group ">
+                                <label for="">身高</label>
+                                <input type="number" class="form-control" name="height">
+                                <label>厘米（cm）</label>
+                            </div>
+                            <div class="form-group ">
+                                <label for="">体重</label>
+                                <input type="number" class="form-control" name="weight">
+                                <label>千克（kg）</label>
+                            </div>
+                            <div class="form-group ">
+                                <label for="">鞋码</label>
+                                <input type="number" class="form-control" name="shoe_size">
+                            </div>
+                            <div class="form-group ">
+                                <label for="">特长爱好</label>
+                                <input type="text" class="form-control" name="hobbies">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="form-inline">
+                            <div class="form-group ">
+                                <label for="">学习成绩</label>
+                                <input type="text" class="form-control" name="academic_record">
+                            </div>
+                            <div class="form-group">
+                                <label for="">班主任联系方式</label>
+                                <input type="text" class="form-control" name="contact_of_teacher">
+                            </div>
+                            <div class="form-group">
+                                <label for="">家长联系方式</label>
+                                <input type="text" class="form-control" name="contact_of_parent">
+                            </div>
+
+                        </div>
+                        <br><br>
+
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="">家庭详细地址</label>
+                                <input type="text" class="form-control" name="home_address">
+                            </div>
+                            <div class="form-group ">
+                                <label for="">是否单亲</label>
+                                <input type="text" class="form-control" name="single_parent_or_not">
+                            </div>
+                            <div class="form-group ">
+                                <label for="">是否低保户</label>
+                                <input type="text" class="form-control" name="low_income_or_not">
+                            </div>
+
+                        </div>
+                        <br><br>
+
+                        <div class="form-inline">
+                            <div class="form-group ">
+                                <label for="">家庭邮编</label>
+                                <input type="text" class="form-control" name="home_postal_code">
+                            </div>
+                            <div class="form-group ">
+                                <label for="">是否孤儿</label>
+                                <input type="text" class="form-control" name="orphan_or_not">
+                            </div>
+                            <div class="form-group ">
+                                <label for="">小小心愿</label>
+                                <input type="text" class="form-control" name="your_little_wish">
+                            </div>
+
+                        </div>
+                        <br><br>
+
+
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>最渴望的一件事</label>
+                                <input type="text" class="form-control" name="the_most_eager_thing_to_do">
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+
+
+                    {#                    家庭情况#}
+                    <div id="jiating-qingkuang">
+                        <h2 class="text-center">家庭情况</h2>
+                        <table class="table table-bordered table-hover">
+                            <br>
+                            <tr>
+                                <th>姓名</th>
+                                <th>关系</th>
+                                <th>年龄</th>
+                                <th>职业/单位</th>
+                                <th>月收入</th>
+                                <th>健康状况</th>
+                                <th>基本情况</th>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <br><br>
+
+                    {#                    家庭经济收入情况#}
+                    <div id="jingji-shouru">
+                        <h2 class="text-center">家庭经济收入情况</h2>
+                        <div class="form-group">
+                            <label>债务情况</label>
+                            <input type="text" class="form-control" name="debt_situation">
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>目前家庭最大困难</label>
+                            <input type="text" class="form-control" name="biggest_difficulty_of_family">
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>家用电器（主要农作物、耕地、牲畜、电器、交通工具）</label>
+                            <input type="text" class="form-control" name="family_assets">
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>住房情况（材质、面积、建造年份等）</label>
+                            <input type="text" class="form-control" name="housing_situation">
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label>全家月收入及主要来源</label>
+                            <input type="text" class="form-control" name="main_source_of_monthly_income">
+                        </div>
+                    </div>
+                    <br><br>
+
+                    {#                   受资助情况#}
+                    <div id="zizhu-qingkuang">
+                        <h2 class="text-center">受资助情况</h2>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>是否住校</label>
+                                <input type="checkbox" class="form-control" name="live_in_school_or_not">
+                            </div>
+                            <div class="form-group">
+                                <label>住校费用/月（交通、伙食等）</label>
+                                <input type="text" class="form-control" name="expenses_of_living_in_school">
+                            </div>
+                            <div class="form-group">
+                                <label>本学期缴费情况</label>
+                                <input type="checkbox" class="form-control" name="paid_or_not">
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>获得其他资助、补助、奖学金（名称及金额）</label>
+                                <input type="text" class="form-control" name="other_help_received">
+                            </div>
+                        </div>
+                        <br><br>
+                         <div class="form-inline">
+                            <div class="form-group">
+                                <label>曾得到何种奖励</label>
+                                <input type="text" class="form-control" name="reward_received">
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+
+                    {#                    学生自述#}
+                     <div  id="xuesheng-zishu" class="form-group">
+                                <h2 class="text-center">学生自述</h2>
+                                <input type="text" class="form-control" style="height: 150px;" name="statement_of_student">
+                     </div>
+                    <br><br>
+
+                    {#                    班主任评语#}
+                    <div  id="banzhuren-pingyu" class="form-group">
+                                <h2 class="text-center">班主任评语</h2>
+                                <input type="text" class="form-control" style="height: 150px;" name="comments_of_teacher">
+                     </div>
+                    <br><br>
+
+                    {#                    家访手记及意见#}
+                    <div  id="shouji-ji-yijian" class="form-group">
+                                <h2 class="text-center">家访手记及意见</h2>
+                                <input type="text" class="form-control" style="height: 150px;" name="home_visit_notes_and_opinions">
+                     </div>
+                    <br><br>
+
+                    {#                    评定贫困程度#}
+                    <div id="pinkun-chengdu">
+                        <h2 class="text-center">评定贫困程度</h2>
+                         <div class="form-inline">
+                            <div class="form-group">
+                                <label>孤儿</label>
+                                <input type="checkbox" class="form-control" name="orphan">
+                            </div>
+                        <div class="form-group">
+                                <label>单亲</label>
+                                <input type="checkbox" class="form-control" name="single_parent">
+                            </div>
+                        <div class="form-group">
+                                <label>重病、残疾</label>
+                                <input type="checkbox" class="form-control" name="illness_or_paralysis">
+                            </div>
+                        <div class="form-group">
+                                <label>多孩子读书</label>
+                                <input type="checkbox" class="form-control" name="multi_children">
+                            </div>
+                        <div class="form-group">
+                                <label>劳动力不足</label>
+                                <input type="checkbox" class="form-control" name="lack_of_workforce">
+                            </div>
+                     </div>
+                    <br><br>
+                    <div class="form-group">
+                        <label>其他</label>
+                        <input type="text" class="form-control" name="other_types">
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <label>备注</label>
+                        <input type="text" class="form-control" name="remarks">
+                    </div>
+                    <br><br>
+                    </div>
+
+
+
                 </div>
-                <div class="form-group">
-                    <label for="schoolInput">体重</label>
-                    <input type="text" class="form-control" id='schoolInput' placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="gradeAndClassInput">鞋码</label>
-                    <input type="text" class="form-control" id='gradeAndClassInput' placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="birthdayInput">特长爱好</label>
-                    <input type="date" class="form-control" id='birthdayInput' placeholder="">
-                </div>
-            </div>
-                <button type="submit" class="btn btn-default center-block">提交</button>
+                <br><br>
+                <hr>
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary btn-block center-block">提交</button>
+                <br>
             </form>
-     {% else %}
-            <h2> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
-    {% endif %}
+        {% else %}
+            <h2 class="text-center"> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
+        {% endif %}
     </div>
 {% endblock %}
