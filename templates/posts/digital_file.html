@@ -9,7 +9,7 @@
 {% block content %}
 
     <header>
-        <h1 class="text-center">龙胜志愿者家访调查表</h1>
+        <h1 class="text-center" id="title">支教对象电子档案</h1>
         <br>
     </header>
     <div id="main">
@@ -158,10 +158,10 @@
                     <div id="jiating-qingkuang">
                         <h2 class="text-center">家庭情况</h2>
                         <br>
-                        <div class="table table-bordered table-hover">
-                            <div id="toolbar">
-                                <a id="addRow" onclick="addRow()">添加家庭成员</a>
-                                <a id="removeRow" onclick="removeRow()">删除家庭成员</a>
+                        <div class="text-center">
+                            <div id="toolbar" style="font-weight: bolder;font-size: 16px;">
+                                <a id="addRow" onclick="addRow();">添加家庭成员</a>&nbsp;&nbsp;
+                                <a id="removeRow" onclick="removeRow();">删除家庭成员</a>
                             </div>
                         </div>
                         <table id="jiatingbiao"></table>
@@ -298,7 +298,7 @@
                 <br><br>
                 <hr>
                 <br>
-                <button type="submit" class="btn btn-lg btn-primary btn-block center-block">提交</button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block center-block" id="submit_btn">提交</button>
                 <br>
             </form>
         {% else %}

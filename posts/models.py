@@ -119,6 +119,9 @@ class Article(BaseModel):
     def get_absolute_url(self):
         pass
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     def viewed(self):
         self.views += 1
         self.save(update_fields=['views'])
@@ -142,6 +145,7 @@ class DigitalFile(BaseModel):
         verbose_name='调查人',
         blank=False,
         null=False,
+        related_name='investigator'
     )
     inves_time = models.DateField('调查日期', default=now, blank=False, null=False)
 
@@ -161,8 +165,8 @@ class DigitalFile(BaseModel):
     school = models.CharField('在读学校', max_length=100, blank=True)
     grade_and_class = models.CharField('年级班别', max_length=50, blank=True)
     school_address = models.CharField('学校地址', max_length=100, blank=True)
-    height = models.FloatField('身高', blank=True)
-    weight = models.FloatField('体重', blank=True)
+    height = models.FloatField('身高', null=True)
+    weight = models.FloatField('体重', null=True)
     shoe_size = models.FloatField('鞋码', blank=True)
     hobbies = models.CharField('特长爱好', max_length=100, blank=True)
     academic_record = models.CharField('学习成绩', max_length=200, blank=True)
@@ -178,13 +182,13 @@ class DigitalFile(BaseModel):
     the_most_eager_thing_to_do = models.CharField('最想做的事情', max_length=200, blank=True)
 
     # 家庭情况
-    name_of_family_member = models.CharField('姓名', max_length=20, blank=True)
-    relationship = models.CharField('与孩子的关系', max_length=20, blank=True)
-    age = models.IntegerField('年龄', blank=True)
-    occupation = models.CharField('职业', max_length=100, blank=True)
-    monthly_income = models.CharField('月收入', max_length=100, blank=True)
-    health_condition = models.CharField('健康状况', max_length=100, blank=True)
-    basic_information = models.CharField('基本情况', max_length=200, blank=True)
+    # name_of_family_member = models.CharField('姓名', max_length=20, blank=True)
+    # relationship = models.CharField('与孩子的关系', max_length=20, blank=True)
+    # age = models.IntegerField('年龄', blank=True)
+    # occupation = models.CharField('职业', max_length=100, blank=True)
+    # monthly_income = models.CharField('月收入', max_length=100, blank=True)
+    # health_condition = models.CharField('健康状况', max_length=100, blank=True)
+    # basic_information = models.CharField('基本情况', max_length=200, blank=True)
 
     # 家庭经济收入情况
     debt_situation = models.CharField('债务情况', max_length=200, blank=True)
@@ -225,4 +229,31 @@ class DigitalFile(BaseModel):
         get_latest_by = 'id'
 
     def __str__(self):
-        return '调查对象：'+self.name
+        return '被调查对象：'+self.name
+
+
+# 家庭情况
+class FamilyMember(BaseModel):
+    investigated_child = models.ForeignKey(
+        'DigitalFile',
+        on_delete=models.CASCADE,
+        verbose_name='被调查对象',
+        blank=False,
+        null=False,
+        related_name='investigated_child'
+    )
+    name_of_family_member = models.CharField('姓名', max_length=20, blank=True)
+    relationship = models.CharField('与孩子的关系', max_length=20, blank=True)
+    age = models.IntegerField('年龄', null=True)
+    occupation = models.CharField('职业', max_length=100, blank=True)
+    monthly_income = models.CharField('月收入', max_length=100, blank=True)
+    health_condition = models.CharField('健康状况', max_length=100, blank=True)
+    basic_information = models.CharField('基本情况', max_length=200, blank=True)
+
+    class Meta:
+        verbose_name = '家庭情况（成员）表'
+        verbose_name_plural = verbose_name
+        get_latest_by = 'id'
+
+    def __str__(self):
+        return self.relationship+'，'+self.name_of_family_member

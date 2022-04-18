@@ -80,7 +80,7 @@ class LoginView(FormView):
     form_class = LoginForm  # 表单
     template_name = 'account/login.html'  # 渲染页面
     success_url = '/'  # 登录成功后的跳转页面
-    login_ttl = 2626560  # 保持登录一个月
+    login_ttl = 3600*24*7  # 保持登录一周
     redirect_field_name = REDIRECT_FIELD_NAME
 
     @method_decorator(sensitive_post_parameters('password'))

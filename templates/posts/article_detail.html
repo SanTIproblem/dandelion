@@ -1,6 +1,49 @@
 {% extends 'common/base.html' %}
+{% load posts_tags %}
 {% block header %}
     <title>文章详情</title>
 {% endblock %}
 {% block content %}
+     <div id="primary" class="site-content">
+        <div id="content" role="main">
+{#        文章详情#}
+            {% load_article_detail article False user %}
+
+            {% if article.type == 'a' %}
+                <nav class="nav-single">
+                    <h3 class="assistive-text">文章导航</h3>
+                    {% if next_article %}
+
+                        <span class="nav-previous"><a href="{{ next_article.get_absolute_url }}" rel="prev"><span
+                                class="meta-nav">&larr;</span> {{ next_article.title }}</a></span>
+                    {% endif %}
+                    {% if prev_article %}
+                        <span class="nav-next"><a href="{{ prev_article.get_absolute_url }}"
+                                                  rel="next">{{ prev_article.title }} <span
+                                class="meta-nav">&rarr;</span></a></span>
+                    {% endif %}
+                </nav><!-- .nav-single -->
+            {% endif %}
+
+        </div><!-- #content -->
+        {% if article.comment_status == "o" and OPEN_SITE_COMMENT %}
+
+
+{#            评论区#}
+            {% include 'comments/tags/comment_list.html' %}
+            {% if user.is_authenticated %}
+                {% include 'comments/tags/post_comment.html' %}
+            {% else %}
+                <div class="comments-area">
+                    <h2 class="comment-meta">您还没有登录，请您<a
+                            href="{% url "account:login" %}?next={{ request.get_full_path }}" rel="nofollow">登录</a>后发表评论。
+                    </h2>
+
+{#                    {% load oauth_tags %}#}
+{#                    {% load_oauth_applications request %}#}
+
+                </div>
+            {% endif %}
+        {% endif %}
+     </div><!-- #primary -->
 {% endblock %}

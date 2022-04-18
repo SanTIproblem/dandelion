@@ -1,4 +1,6 @@
 {% extends 'common/base.html' %}
+{% load posts_tags %}
+{% load cache %}
 {% block header %}
     <title>论坛首页</title>
 {% endblock %}
@@ -8,7 +10,8 @@
         <div id="contents">
         {% if user.is_authenticated %}
         {#  需要一个循环，把数据库里的帖子都读出来  #}
-            {% for post in post_list %}
+            {% for article in article_list %}
+                {% load_article_detail article True user %}
             {% empty %}
                 <div class="jumbotron">
                     <h1 class="display-4">这里还没有帖子<br>😀😀😀</h1>
@@ -19,7 +22,6 @@
         {% else %}
              <h2 class="text-center"> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
         {% endif %}
-
         </div>
     </div>
 {% endblock %}

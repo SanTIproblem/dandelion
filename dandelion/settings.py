@@ -162,6 +162,29 @@ DATE_TIME_FORMAT = '%Y-%m-%d'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# bootstrap color styles
+BOOTSTRAP_COLOR_TYPES = [
+    'default', 'primary', 'success', 'info', 'warning', 'danger'
+]
+
+# paginate
+PAGINATE_BY = 10
+# http cache timeout
+CACHE_CONTROL_MAX_AGE = 2592000
+# cache setting
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': 10800,
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+SITE_ID = 1
+BAIDU_NOTIFY_URL = os.environ.get('DJANGO_BAIDU_NOTIFY_URL') \
+                   or 'http://data.zz.baidu.com/urls?site=https://www.lylinux.net&token=1uAOGrMsUm5syDGn'
+
+
 
 # Email:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

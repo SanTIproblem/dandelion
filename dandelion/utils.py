@@ -147,7 +147,7 @@ def parse_dict_to_url(dict):
 #     if value:
 #         return value
 #     else:
-#         from blog.models import BlogSettings
+#         from posts.models import BlogSettings
 #         if not BlogSettings.objects.count():
 #             setting = BlogSettings()
 #             setting.sitename = 'djangoblog'
