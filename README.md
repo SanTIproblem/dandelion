@@ -118,6 +118,9 @@ bugs：
 bugs：
 
 1. 登出以后nav条不变
+
+   解决：删除cache，不缓存导航条
+
 2. addrow&removerow不能成功 （and views层中处理的应该是一对多关系）
 
 

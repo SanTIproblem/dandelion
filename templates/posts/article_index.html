@@ -1,12 +1,20 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% load posts_tags %}
 {% load cache %}
 {% block header %}
+    <link rel="stylesheet" href="{% static 'posts/css/base_posts.css' %}">
     <title>论坛首页</title>
 {% endblock %}
 
 {% block content %}
     <div id="main">
+    <div id="edit_article" style="text-align: right;position: absolute;right: 20%" class="text-center">
+        <a href="{% url 'posts:edit_article' %}">
+            <button class="btn btn-lg btn-primary btn-block" id="submit_btn">创建帖子</button>
+        </a>
+
+    </div>
         <div id="contents">
         {% if user.is_authenticated %}
         {#  需要一个循环，把数据库里的帖子都读出来  #}
@@ -14,11 +22,15 @@
                 {% load_article_detail article True user %}
             {% empty %}
                 <div class="jumbotron">
-                    <h1 class="display-4">这里还没有帖子<br>😀😀😀</h1>
-                    <br>
+                    <h1 class="display-4 text-center">这里还没有帖子<br><br>😀😀😀</h1>
+                    <br><br>
                     <p class="lead">请点击右上角的发帖按钮发表第一篇帖子吧！</p>
                 </div>
             {% endfor %}
+{#            分页#}
+{#             {% if is_paginated %}#}
+{#                {% load_pagination_info page_obj page_type tag_name %}#}
+{#            {% endif %}#}
         {% else %}
              <h2 class="text-center"> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
         {% endif %}

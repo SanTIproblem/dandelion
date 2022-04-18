@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpRespons
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import FormView, RedirectView, ListView, DetailView
+from django.views.generic import FormView, RedirectView, ListView, DetailView, CreateView
 from django.utils.decorators import method_decorator
 
 from accounts.models import NormalUser
@@ -151,7 +151,19 @@ class ArticleDetailView(DetailView):
         return super().get_context_data(**kwargs)
 
 
+class EditArticleView(CreateView):
+    '''
+    编辑发帖
+    '''
 
+    # 牛掰，直接用django内置form把article中的属性给布置好了
+    model = Article
+    template_name = 'posts/edit_article.html'
+    fields = ['author',
+              'title',
+              'content',
+              # 'tags',
+              ]
 
 
 

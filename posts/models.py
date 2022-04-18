@@ -100,12 +100,12 @@ class Article(BaseModel):
     comment_status = models.CharField('评论状态', max_length=1, choices=COMMENT_STATUS, default='o')
     type = models.CharField('类型', max_length=1, choices=TYPE, default='a')
     article_order = models.PositiveIntegerField('排序，值越大越前', default=0, blank=False, null=False)
-    tags = models.ManyToManyField('Tag', verbose_name='标签集合', blank=True)
-    category = models.ForeignKey('Category',
-                                 verbose_name='文章分类',
-                                 on_delete=models.CASCADE,
-                                 blank=False,
-                                 null=False)
+    # tags = models.ManyToManyField('Tag', verbose_name='标签集合', blank=True)
+    # category = models.ForeignKey('Category',
+    #                              verbose_name='文章分类',
+    #                              on_delete=models.CASCADE,
+    #                              blank=False,
+    #                              null=False)
 
     class Meta:
         ordering = ['-article_order', '-published_time']
@@ -114,10 +114,11 @@ class Article(BaseModel):
         get_latest_by = 'id'
 
     def __str__(self):
-        return self.title
+        return str(self.author)+'，'+self.title
 
     def get_absolute_url(self):
-        pass
+        # 重定向到论坛首页
+        return reverse('posts:article_index')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
