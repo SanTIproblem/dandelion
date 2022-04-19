@@ -142,31 +142,32 @@ def parse_dict_to_url(dict):
     return url
 
 
-# def get_blog_setting():
-#     value = cache.get('get_blog_setting')
-#     if value:
-#         return value
-#     else:
-#         from posts.models import BlogSettings
-#         if not BlogSettings.objects.count():
-#             setting = BlogSettings()
-#             setting.sitename = 'djangoblog'
-#             setting.site_description = '基于Django的博客系统'
-#             setting.site_seo_description = '基于Django的博客系统'
-#             setting.site_keywords = 'Django,Python'
-#             setting.article_sub_length = 300
-#             setting.sidebar_article_count = 10
-#             setting.sidebar_comment_count = 5
-#             setting.show_google_adsense = False
-#             setting.open_site_comment = True
-#             setting.analyticscode = ''
-#             setting.beiancode = ''
-#             setting.show_gongan_code = False
-#             setting.save()
-#         value = BlogSettings.objects.first()
-#         logger.info('set cache get_blog_setting')
-#         cache.set('get_blog_setting', value)
-#         return value
+# 获取站点设置
+def get_blog_setting():
+    value = cache.get('get_blog_setting')
+    if value:
+        return value
+    else:
+        from posts.models import BlogSettings
+        if not BlogSettings.objects.count():
+            setting = BlogSettings()
+            setting.sitename = '领航·蒲公英'
+            setting.site_description = '领航·蒲公英 支教志愿者公益网站'
+            setting.site_seo_description = '领航·蒲公英 支教志愿者公益网站'
+            setting.site_keywords = '支教，公益'
+            setting.article_sub_length = 300
+            setting.sidebar_article_count = 10
+            setting.sidebar_comment_count = 5
+            setting.show_google_adsense = False
+            setting.open_site_comment = True
+            setting.analyticscode = ''
+            setting.beiancode = ''
+            setting.show_gongan_code = False
+            setting.save()
+        value = BlogSettings.objects.first()
+        logger.info('set cache get_blog_setting')
+        cache.set('get_blog_setting', value)
+        return value
 
 
 # def save_user_avatar(url):

@@ -6,7 +6,11 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h2 class="text-center">创建你的帖子（请友善发言噢~）</h2>
+        <header class="text-center">
+            <h2>创建你的帖子</h2>
+            <p>（请友善发言噢~）</p>
+        </header>
+
         <form class="text-center" action="{% url 'posts:edit_article' %}" method="post">
         {% csrf_token %}
 {#            django内置表单，Article类形成的form#}

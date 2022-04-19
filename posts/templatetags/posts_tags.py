@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 register = template.Library()
 
-# 论坛的tags
+# 论坛的tags函数
 
 @register.simple_tag
 def timeformat(data):

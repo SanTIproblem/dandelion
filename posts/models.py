@@ -258,3 +258,81 @@ class FamilyMember(BaseModel):
 
     def __str__(self):
         return self.relationship+'，'+self.name_of_family_member
+
+
+
+class BlogSettings(models.Model):
+    '''
+    站点设置
+    '''
+    sitename = models.CharField(
+        verbose_name='网站名称',
+        max_length=200,
+        blank=False,
+        null=False,
+        default='领航·蒲公英'
+    )
+    site_description =models.TextField(
+        verbose_name='网站描述',
+        blank=False,
+        null=False,
+        default='领航·蒲公英 支教志愿者公益网站'
+    )
+    site_seo_description = models.TextField(
+        verbose_name="网站SEO描述", max_length=1000, null=False, blank=False, default='')
+    site_keywords = models.TextField(
+        verbose_name="网站关键字",
+        max_length=1000,
+        null=False,
+        blank=False,
+        default='')
+    article_sub_length = models.IntegerField("文章摘要长度", default=300)
+    sidebar_article_count = models.IntegerField("侧边栏文章数目", default=10)
+    sidebar_comment_count = models.IntegerField("侧边栏评论数目", default=5)
+    show_google_adsense = models.BooleanField('是否显示谷歌广告', default=False)
+    google_adsense_codes = models.TextField(
+        '广告内容', max_length=2000, null=True, blank=True, default='')
+    open_site_comment = models.BooleanField('是否打开网站评论功能', default=True)
+    beiancode = models.CharField(
+        '备案号',
+        max_length=2000,
+        null=True,
+        blank=True,
+        default='')
+    analyticscode = models.TextField(
+        "网站统计代码",
+        max_length=1000,
+        null=False,
+        blank=False,
+        default='')
+    show_gongan_code = models.BooleanField(
+        '是否显示公安备案号', default=False, null=False)
+    gongan_beiancode = models.TextField(
+        '公安备案号',
+        max_length=2000,
+        null=True,
+        blank=True,
+        default='')
+    resource_path = models.CharField(
+        "静态文件保存地址",
+        max_length=300,
+        null=False,
+        default='/var/www/resource/')
+
+    class Meta:
+        verbose_name = '网站配置'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.sitename
+
+    def clean(self):
+        if BlogSettings.objects.exclude(id=self.id).count():
+            raise ValidationError(_('只能有一个配置'))
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        from dandelion.utils import cache
+        cache.clear()
+
+

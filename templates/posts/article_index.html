@@ -9,15 +9,21 @@
 
 {% block content %}
     <div id="main">
-    <div id="edit_article" style="text-align: right;position: absolute;right: 20%" class="text-center">
+    <br>
+    <div id="subs"  class="text-center" style="display: flex;justify-content: center;align-items: center">
+        <a href="{% url 'posts:digital_file' %}">
+            <button class="btn btn-lg btn-primary btn-block text-center" id="submit_btn">电子档案</button>
+        </a>
+        <span style="width:3%"></span>
         <a href="{% url 'posts:edit_article' %}">
-            <button class="btn btn-lg btn-primary btn-block" id="submit_btn">创建帖子</button>
+            <button class="btn btn-lg btn-primary btn-block text-center" id="submit_btn">创建帖子</button>
         </a>
 
     </div>
+    <br>
         <div id="contents">
         {% if user.is_authenticated %}
-        {#  需要一个循环，把数据库里的帖子都读出来  #}
+        {#  需要一个循环，把数据库里的article都读出来  #}
             {% for article in article_list %}
                 {% load_article_detail article True user %}
             {% empty %}
