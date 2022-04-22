@@ -27,9 +27,9 @@ class CommentsView(FormView):
 
     # 定位到当前评论区的位置
     def get(self, request, *args, **kwargs):
-        print('我的参数是：',self.kwargs)
         article_id = self.kwargs['article_id']
         article = Article.objects.get(pk=article_id)
+        # 获取当前文章url（具体打开的是哪一篇文章）
         url = article.get_absolute_url()
         return HttpResponseRedirect(url + '#comments')
 
@@ -39,6 +39,7 @@ class CommentsView(FormView):
         article = Article.objects.get(pk=article_id)
 
         if self.request.user.is_authenticated:
+            print('啊啊啊',form)
             # 改成HiddenInput
             form.fields.update({
                 'email': forms.EmailField(widget=forms.HiddenInput()),

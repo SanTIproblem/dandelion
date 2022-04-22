@@ -150,7 +150,7 @@ bugs：
 
 bugs：
 
-1. index页点击帖子，应该跳转到详情页（需要slug函数生成url）
+1. index页点击帖子，应该跳转到详情页：完成article类中get_absolute_url函数
 
    ![image-20220419205741364](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220419205741364.png)
 

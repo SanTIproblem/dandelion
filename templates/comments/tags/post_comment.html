@@ -6,8 +6,26 @@
         <p>正文：</p>
         <form action="{% url 'comments:post_comment' article.pk %}" method="post" >
             {% csrf_token %}
-            {{ form.as_p }}
-
+            <div class="comment" id="comment-form-comment">
+                {{ form.comment_body.label_tag }}
+                {{ form.comment_body }}
+                {{ form.comment_body.errors }}
+            </div>
+            <div class="comment" id="comment-form-author">
+                {% if not form.name.is_hidden %}
+                    {{ form.name.label_tag }}
+                {% endif %}
+            {{ form.name }}
+            {{ form.name.errors }}
+            </div>
+            <div class="comment" id="comment-form-email">
+                {% if not form.email.is_hidden %}
+                    {{ form.email.label_tag }}
+                {% endif %}
+            {{ form.email }}
+            {{ form.email.errors }}
+            </div>
+        {{ form.parent_comment_id }}
             <button type="submit" id="submit_btn" class="btn btn-lg btn-primary btn-block">发表评论</button>
         </form>
     </div><!-- #respond -->

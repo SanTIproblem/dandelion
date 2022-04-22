@@ -32,9 +32,10 @@
                     </span>
                 </a>
             {% endif %}
-            <div style="float:right">
+            <br>
+            <p style="float:right">
                 {{ article.views }} 浏览量
-            </div>
+            </p>
         </div><!-- .comments-link -->
         <br><br>
         {% if article.type == 'a' %}
@@ -52,7 +53,8 @@
 {#            {{ article.body|custom_markdown|escape|truncatechars_content }}#}
             {{ article.body }}
             <p class='read-more'><a
-                    href=' {{ article.get_absolute_url }}'>相关阅读</a></p>
+                    href=' {{ article.get_absolute_url }}'>相关阅读</a>
+            </p>
         {% else %}
             {% get_markdown_toc article.body as markdown %}
             {% if article.show_toc %}

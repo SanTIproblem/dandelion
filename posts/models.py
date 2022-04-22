@@ -116,8 +116,12 @@ class Article(BaseModel):
         return str(self.author)+'，'+self.title
 
     def get_absolute_url(self):
-        # 重定向到论坛首页
-        return reverse('posts:article_index')
+        return reverse('posts:get_detail_by_id',kwargs={
+            'article_id':self.id,
+            'year':self.published_time.year,
+            'month':self.published_time.month,
+            'day':self.published_time.day,
+        } )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -125,6 +129,27 @@ class Article(BaseModel):
     def viewed(self):
         self.views += 1
         self.save(update_fields=['views'])
+
+    def comment_list(self):
+        key = f'article_comments_{self.id}'
+        value = cache.get(key)
+        print('value:',value)
+        if value:
+            logger.info('get article comments:{id}'.format(id=self.id))
+            return value
+        else:
+            # 把评论打开的筛选出来
+            comments = self.comments_set.filter(is_enable=True)
+            print('comments:',comments)
+            cache.set(key,comments,3600)
+            logger.info('set article comments:{id}'.format(id=self.id))
+            return comments
+
+    def prev_article(self):
+        pass
+
+    def next_article(self):
+        pass
 
 
 # 分类

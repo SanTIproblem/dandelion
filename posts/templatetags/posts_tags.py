@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from posts.models import Article, Category, Tag, LinkShowType
-# from comments.models import Comment
+from comments.models import Comments
 from dandelion.utils import CommonMarkdown
 from dandelion.utils import cache
 from dandelion.utils import get_current_site
@@ -269,14 +269,14 @@ def load_article_detail(article, isindex, user):
     :param isindex:是否列表页，若是列表页只显示摘要
     :return:
     """
-    # from dandelion.utils import get_blog_setting
-    # blogsetting = get_blog_setting()
+    from dandelion.utils import get_blog_setting
+    blogsetting = get_blog_setting()
 
     return {
         'article': article,
         'isindex': isindex,
         'user': user,
-        # 'open_site_comment': blogsetting.open_site_comment,
+        'open_site_comment': blogsetting.open_site_comment,
     }
 
 

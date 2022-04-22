@@ -16,6 +16,7 @@ from django.utils.decorators import method_decorator
 from accounts.models import NormalUser
 from .models import DigitalFile, LinkShowType, Article, Category, Tag
 from .forms import ArticleListForm, DigitalFileForm
+from comments.forms import CommentsForm
 from dandelion.utils import send_email, get_sha256, get_current_site, generate_code, cache
 
 # Create your views here.
@@ -125,28 +126,30 @@ class ArticleDetailView(DetailView):
         self.object = obj
         return obj
 
+    # 返回用于显示对象的上下文数据
     def get_context_data(self, **kwargs):
-        articleid = int(self.kwargs[self.pk_url_kwarg])
-        # comment_form = CommentForm()
+        # articleid = int(self.kwargs[self.pk_url_kwarg])
+        print('看看context data里都有啥：',self.object)
+        comment_form = CommentsForm()
         user = self.request.user
         # 如果用户已经登录，则隐藏邮件和用户名输入框
-        # if user.is_authenticated and not user.is_anonymous and user.email and user.username:
-        #     comment_form.fields.update({
-        #         'email': forms.CharField(widget=forms.HiddenInput()),
-        #         'name': forms.CharField(widget=forms.HiddenInput()),
-        #     })
-        #     comment_form.fields["email"].initial = user.email
-        #     comment_form.fields["name"].initial = user.username
+        if user.is_authenticated and not user.is_anonymous and user.email and user.username:
+            comment_form.fields.update({
+                'email': forms.EmailField(widget=forms.HiddenInput()),
+                'name': forms.CharField(widget=forms.HiddenInput()),
+            })
+            comment_form.fields["email"].initial = user.email
+            comment_form.fields["name"].initial = user.username
 
         article_comments = self.object.comment_list()
 
-        # kwargs['form'] = comment_form
+        kwargs['form'] = comment_form
         kwargs['article_comments'] = article_comments
         kwargs['comment_count'] = len(
             article_comments) if article_comments else 0
 
-        kwargs['next_article'] = self.object.next_article
-        kwargs['prev_article'] = self.object.prev_article
+        kwargs['next_article'] = self.object.next_article()
+        kwargs['prev_article'] = self.object.prev_article()
 
         return super().get_context_data(**kwargs)
 
