@@ -1,0 +1,14 @@
+<div id="post_comment">
+    <header>
+        <h2 class="text-left">发表评论</h2>
+    </header>
+    <div id="comment-content" class="border-0" style="background: #B5AC49;">
+        <p>正文：</p>
+        <form action="{% url 'comments:post_comment' article.pk %}" method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" id="submit_btn" class="btn btn-lg btn-primary btn-block">发表评论</button>
+        </form>
+    </div><!-- #respond -->
+</div><!-- #comments .comments-area -->

@@ -14,10 +14,9 @@ import accounts.models
 from dandelion.utils import cache_decorator, cache
 from dandelion.utils import get_current_site
 
-logger = logging.getLogger(__name__)
-
 # Create your models here.
 
+logger = logging.getLogger(__name__)
 
 '''
 blank和null默认都是false
@@ -231,6 +230,9 @@ class DigitalFile(BaseModel):
 
     def __str__(self):
         return '被调查对象：'+self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 
 # 家庭情况

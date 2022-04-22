@@ -27,15 +27,13 @@
 
         </div><!-- #content -->
         {% if article.comment_status == "o" and OPEN_SITE_COMMENT %}
-
-
 {#            评论区#}
             {% include 'comments/tags/comment_list.html' %}
             {% if user.is_authenticated %}
                 {% include 'comments/tags/post_comment.html' %}
             {% else %}
                 <div class="comments-area">
-                    <h2 class="comment-meta">您还没有登录，请您<a
+                    <h2 class="comment-meta text-center">您还没有登录，请您<a
                             href="{% url "account:login" %}?next={{ request.get_full_path }}" rel="nofollow">登录</a>后发表评论。
                     </h2>
 

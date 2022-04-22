@@ -33,12 +33,13 @@
                 </a>
             {% endif %}
             <div style="float:right">
-                {{ article.views }} views
+                {{ article.views }} 浏览量
             </div>
         </div><!-- .comments-link -->
-        <br/>
+        <br><br>
         {% if article.type == 'a' %}
             {% if not isindex %}
+{#                面包屑缓存#}
                 {% cache 36000 breadcrumb article.pk %}
                     {% load_breadcrumb article %}
                 {% endcache %}

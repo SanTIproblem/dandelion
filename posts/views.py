@@ -286,9 +286,10 @@ class DigitalFileView(FormView):
 
     def form_valid(self, form):
         print(111)
-        form = Form(data=self.request.POST)
+        # form = Form(data=self.request.POST)
         if form.is_valid():
             print('form: ', form)
+            digi_file = form.save(False)
             title = "提交成功！"
             content = "家访调查表已成功提交！感谢您为孩子们的付出！"
             return HttpResponseRedirect('/login/')
