@@ -133,7 +133,6 @@ class Article(BaseModel):
     def comment_list(self):
         key = f'article_comments_{self.id}'
         value = cache.get(key)
-        print('value:',value)
         if value:
             logger.info('get article comments:{id}'.format(id=self.id))
             return value

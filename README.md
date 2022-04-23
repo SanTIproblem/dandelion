@@ -21,7 +21,7 @@
 
 
 
-## 项目结构
+## 网站结构
 
 ![领航 · 蒲公英 网站](D:\蔡明宸\项目 ＆ 学习\2022年小挑\省赛\领航 · 蒲公英 网站.png)
 
@@ -154,3 +154,8 @@ bugs：
 
    ![image-20220419205741364](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220419205741364.png)
 
+
+
+04.23：
+
+1. 什么时候form_valid

@@ -159,7 +159,7 @@ class EditArticleView(CreateView):
     编辑发帖
     '''
 
-    # 牛掰，直接用django内置form把article中的属性给布置好了
+    # 直接用django内置form把article中的属性给布置好了
     model = Article
     template_name = 'posts/edit_article.html'
     fields = ['author',

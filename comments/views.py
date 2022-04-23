@@ -20,6 +20,7 @@ from dandelion.utils import send_email, get_sha256, get_current_site, generate_c
 
 logger = logging.getLogger(__name__)
 
+
 class CommentsView(FormView):
     form_class = CommentsForm
     # 评论区渲染的页面应该是文章详情页
@@ -37,49 +38,47 @@ class CommentsView(FormView):
     def form_invalid(self, form):
         article_id = self.kwargs['article_id']
         article = Article.objects.get(pk=article_id)
+        print('no合法form')
 
         if self.request.user.is_authenticated:
-            print('啊啊啊',form)
             # 改成HiddenInput
             form.fields.update({
                 'email': forms.EmailField(widget=forms.HiddenInput()),
                 'name': forms.CharField(widget=forms.HiddenInput()),
             })
             user = self.request.user
+            print(user)
             form.fields['email'].initial = user.email
-            form.fields['name'].initial = user.name
+            form.fields['name'].initial = user.username
 
-            return self.render_to_response({
-                'form': form,
-                'article': article
-            })
+        return self.render_to_response({
+            'form': form,
+            'article': article
+        })
 
     # 表单数据合法
     def form_valid(self, form):
         article_id = self.kwargs['article_id']
         article = Article.objects.get(pk=article_id)
         user = self.request.user
-        print('看看合法form：',form)
+        print('合法form')
 
         if not self.request.user.is_authenticated:
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
             user = NormalUser.objects.get_or_create(
-                username=name,email=email
+                username=name, email=email
             )[0]
 
-            comment = form.save(False)
-            comment.article = article
-            comment.author = user
-            if form.cleaned_data['parent_comment_id']:
-                parent_comment_id = Comments.objects.get(
-                    pk=form.cleaned_data['parent_comment_id']
-                )
-            comment.save(True)
-
-            return HttpResponseRedirect(
-                f'{article.get_absolute_url()}#div-comment-{comment.pk}'
+        comment = form.save(False)
+        comment.article = article
+        comment.author = user
+        if form.cleaned_data['parent_comment_id']:
+            comment.parent_comment_id = Comments.objects.get(
+                pk=form.cleaned_data['parent_comment_id']
             )
+        comment.save(True)
 
-
-
+        return HttpResponseRedirect(
+            f'{article.get_absolute_url()}#div-comment-{comment.pk}'
+        )
