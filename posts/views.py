@@ -129,11 +129,11 @@ class ArticleDetailView(DetailView):
     # 返回用于显示对象的上下文数据
     def get_context_data(self, **kwargs):
         # articleid = int(self.kwargs[self.pk_url_kwarg])
-        print('看看context data里都有啥：',self.object)
+        print('ArticleDetailView看看context data里都有啥：',self.object)
         comment_form = CommentsForm()
         user = self.request.user
         # 如果用户已经登录，则隐藏邮件和用户名输入框
-        if user.is_authenticated and not user.is_anonymous and user.email and user.username:
+        if user.is_authenticated :
             comment_form.fields.update({
                 'email': forms.EmailField(widget=forms.HiddenInput()),
                 'name': forms.CharField(widget=forms.HiddenInput()),
@@ -167,6 +167,18 @@ class EditArticleView(CreateView):
               'content',
               # 'tags',
               ]
+
+    # 自动匹配author
+    def form_invalid(self, form):
+        print('EditArticleView看看：',form)
+        user = self.request.user
+        if user.is_authenticated:
+            pass
+
+
+
+
+
 
 
 

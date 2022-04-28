@@ -136,3 +136,4 @@ statics/assets/
 statics/
 collectstatic/
 dandelion.log
+*/migrations

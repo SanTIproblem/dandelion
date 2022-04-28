@@ -158,4 +158,10 @@ bugs：
 
 04.23：
 
-1. 什么时候form_valid
+bugs：
+
+1. comments：什么时候form_valid（评论成功） 
+
+![image-20220423235329265](C:\Users\94599\AppData\Roaming\Typora\typora-user-images\image-20220423235329265.png)
+
+2. post：创建帖子需要自动匹配author

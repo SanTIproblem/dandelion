@@ -27,13 +27,15 @@
                     {% if article.comment_set and article.comment_set.count %}
                         {{ article.comment_set.count }}个评论
                     {% else %}
+                        {% if isindex %}
                         发表评论
+                            {% endif %}
                     {% endif %}
                     </span>
                 </a>
             {% endif %}
             <br>
-            <p style="float:right">
+            <p style="float:left">
                 {{ article.views }} 浏览量
             </p>
         </div><!-- .comments-link -->
@@ -56,7 +58,11 @@
                     href=' {{ article.get_absolute_url }}'>相关阅读</a>
             </p>
         {% else %}
-            {% get_markdown_toc article.body as markdown %}
+{#            {% get_markdown_toc article.body as markdown %}#}
+            <div class="content-of-article" style="font-size: 16px;">
+                {{ article.content }}
+            </div>
+
             {% if article.show_toc %}
 
                 <b>目录:</b>

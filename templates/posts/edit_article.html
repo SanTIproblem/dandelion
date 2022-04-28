@@ -10,15 +10,32 @@
             <h2>创建你的帖子</h2>
             <p>（请友善发言噢~）</p>
         </header>
-
+        <br><br>
         <form class="text-center" action="{% url 'posts:edit_article' %}" method="post">
         {% csrf_token %}
 {#            django内置表单，Article类形成的form#}
+
+
         {{ form.as_p }}
+{#            <div id="title-of-article" style="font-size: 24px;">#}
+{#                {{ form.title.label_tag }}#}
+{#                {{ form.title }}#}
+{#                {{ form.title.errors }}#}
+{#            </div>#}
+{#            <br><br>#}
+{#             <div id="content-of-article">#}
+{#                {{ form.content.label_tag }}#}
+{#                {{ form.content }}#}
+{#                {{ form.content.errors }}#}
+{#            </div>#}
+
+
+
             <br>
         <button class="btn btn-lg btn-primary btn-block center-block text-center" type="submit" id="submit_btn">发帖</button>
         </form>
     {% else %}
             <h2 class="text-center"> 您还没有<a href="{% url 'account:login' %}">登录</a>，无法访问此页面！ </h2>
     {% endif %}
+    <br><br>
 {% endblock %}

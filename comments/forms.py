@@ -10,7 +10,7 @@ from accounts.models import NormalUser
 
 
 class CommentsForm(forms.ModelForm):
-    url = forms.URLField(label='网址',required=True)
+    # url = forms.URLField(label='网址',required=False)
     email = forms.EmailField(label='电子邮箱',required=True)
     name = forms.CharField(label='姓名',required=True)
     parent_comment_id = forms.IntegerField(

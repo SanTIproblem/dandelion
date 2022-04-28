@@ -25,7 +25,9 @@
         {% if user.is_authenticated %}
         {#  需要一个循环，把数据库里的article都读出来  #}
             {% for article in article_list %}
+                <p>
                 {% load_article_detail article True user %}
+                </p><hr>
             {% empty %}
                 <div class="jumbotron">
                     <h1 class="display-4 text-center">这里还没有帖子<br><br>😀😀😀</h1>

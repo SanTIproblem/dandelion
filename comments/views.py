@@ -1,20 +1,15 @@
 import logging
-from django.contrib.auth import get_user_model, REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from django.forms.forms import Form
-from django.shortcuts import render, get_object_or_404
-from django.conf import settings
-from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from django.views.generic import FormView, RedirectView, ListView, DetailView, CreateView
-from django.utils.decorators import method_decorator
 
 from accounts.models import NormalUser
 from posts.models import Article
 from .models import Comments
 from .forms import CommentsForm
-from dandelion.utils import send_email, get_sha256, get_current_site, generate_code, cache
+
+import markdown
+import emoji
 
 # Create your views here.
 
@@ -32,22 +27,21 @@ class CommentsView(FormView):
         article = Article.objects.get(pk=article_id)
         # 获取当前文章url（具体打开的是哪一篇文章）
         url = article.get_absolute_url()
-        return HttpResponseRedirect(url + '#comments')
+        return self.render_to_response(self.get_form())
 
-    # 表单数据不合法（没填完）
+    # 表单数据不合法
     def form_invalid(self, form):
         article_id = self.kwargs['article_id']
         article = Article.objects.get(pk=article_id)
-        print('no合法form')
+        print('不合法form',form.cleaned_data)
 
         if self.request.user.is_authenticated:
             # 改成HiddenInput
             form.fields.update({
-                'email': forms.EmailField(widget=forms.HiddenInput()),
-                'name': forms.CharField(widget=forms.HiddenInput()),
+                'email': forms.EmailField(widget=forms.HiddenInput),
+                'name': forms.CharField(widget=forms.HiddenInput),
             })
             user = self.request.user
-            print(user)
             form.fields['email'].initial = user.email
             form.fields['name'].initial = user.username
 
@@ -61,7 +55,7 @@ class CommentsView(FormView):
         article_id = self.kwargs['article_id']
         article = Article.objects.get(pk=article_id)
         user = self.request.user
-        print('合法form')
+        print('合法form',form.cleaned_data)
 
         if not self.request.user.is_authenticated:
             email = form.cleaned_data['email']
@@ -74,9 +68,15 @@ class CommentsView(FormView):
         comment.article = article
         comment.author = user
         if form.cleaned_data['parent_comment_id']:
-            comment.parent_comment_id = Comments.objects.get(
+            parent_comment = Comments.objects.get(
                 pk=form.cleaned_data['parent_comment_id']
             )
+            comment.parent_comment = parent_comment
+        # else:
+        #     parents_comments = Comments.objects.get(pk=1)
+        #     comment.parents_comments = parents_comments
+
+        print(comment)
         comment.save(True)
 
         return HttpResponseRedirect(
