@@ -16,7 +16,7 @@ class Comments(models.Model):
     post_time = models.DateTimeField('评论时间', default=now)
     last_mod_time = models.DateTimeField('修改时间', default=now)
     # 支持markdown
-    comment_body = MDTextField('评论正文', max_length=300)
+    comment_body = models.TextField('评论正文', max_length=300)
     # 评论者
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -34,7 +34,7 @@ class Comments(models.Model):
     # 上级评论（comment_item_tree用），自关联
     parent_comment = models.ForeignKey(
         'self',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         verbose_name='上级评论',
         null=True,
     )
@@ -52,3 +52,5 @@ class Comments(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+

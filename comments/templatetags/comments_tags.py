@@ -30,6 +30,12 @@ def load_comment_detail(comment, user, email):
     pass
 
 
+@register.simple_tag
+def count_pc_number(article):
+    pc = Comments.objects.filter(parent_comment=None, article=article)
+    return len(pc)
+
+
 
 
 

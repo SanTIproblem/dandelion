@@ -4,15 +4,16 @@
 <div id="comment-list">
 <ul class="comment-tabs group">
     <h3 class="active" style="text-decoration: none;color: #348F50;"><a href="#comment-list"><i
-                class="fa fa-comments-o" ></i>评论区&nbsp;<span>{{ comment_count }}</span></a></h3>
+                class="fa fa-comments-o" ></i>评论区&nbsp;<span>{% count_pc_number article %}</span></a></h3>
 </ul>
     {% if article_comments %}
-        {% cache 36000 article_comments article.id %}
+{#        {% cache 36000 article_comments article.id %}#}
         <div id="comment-list" class="comment-tab" style="display: block;">
             <ol class="comment">
             {#        查询该文章的所有根评论#}
                 {% query article_comments parent_comment=None as primary_comments %}
                 {% for comment in primary_comments %}
+{#                    {{ comment.comment_body }}#}
                     {% with 0 as depth %}
                         {% include 'comments/tags/comment_item_tree.html' %}
                     {% endwith %}
@@ -21,6 +22,6 @@
                 {% endfor %}
             </ol><!--/.commentlist-->
         </div>
-        {% endcache %}
+{#        {% endcache %}#}
     {% endif %}
 </div>

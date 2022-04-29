@@ -1,4 +1,48 @@
 {% load posts_tags %}
-<div id="this-is-a-comment-tree">
-    {{ comment.comment_body }}
-</div>
+<li id="this-is-a-comment-tree-{{ comment.pk }}" class="depth-{{ depth }}">
+    <div class="comment" id="this-is-a-comment-{{ comment.pk }}"
+        style="display: flex;line-height: 2;font-size: 16px;">
+        <div id="comment-avatar" class="" style="float: left">
+            <p class="img-circle img-rounded"><img src=""></p>
+        </div>
+        <div id="comment-content" class="" style="float: right">
+            <div class="" id="comment-info" style="color: grey">
+                <a href="#comment-{{ comment.parent_comment.pk }}" style="">{{ comment.author.username }}</a>&nbsp;
+                {{ comment.post_time }}
+{#                {{ comment.post_time.year }}年{{ comment.post_time.month }}月{{ comment.post_time.day }}日&nbsp;#}
+{#                {{ comment.post_time.hour }}:{{  comment.post_time.minute }}#}
+            </div>
+
+            {% if comment.parent_comment %}
+                 <div>回复 <a
+                        href="#comment-{{ comment.parent_comment.pk }}">@{{ comment.parent_comment.author.username }}</a>
+                </div>
+            {% endif %}
+            <div class="" id="comment-body">
+                {{ comment.comment_body }}
+            </div>
+
+{#        执行回复操作的js函数#}
+        <div id="reply"style="font-size: 12px;">
+            <button class=""
+            onclick="do_reply {{ comment.pk }}">
+                回复
+            </button>
+        </div>
+        </div>
+    </div>
+</li><!-- #comment-## -->
+{# 查询子评论 #}
+{% query article_comments parent_comment=comment as cc_comments %}
+{% for cc in cc_comments %}
+    {% with comment_item=cc template_name="comments/tags/comment_item_tree.html" %}
+        {% if depth >= 1 %}
+            {% include template_name %}
+        {% else %}
+            {% with depth=depth|add:1 %}
+                {% include template_name %}
+            {% endwith %}
+        {% endif %}
+    {% endwith %}
+{% endfor %}
+<br>
