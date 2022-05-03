@@ -131,9 +131,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-templates/xuexi/
-statics/assets/
-statics/
 collectstatic/
 dandelion.log
-*/migrations
+*/migrations/
+others/
